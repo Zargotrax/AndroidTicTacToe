@@ -127,6 +127,8 @@ public class GameFragment extends Fragment {
     }
 
     public void NextPlayer(){
+        int chkw = CheckWin();
+
         if(playerTurn == 0){
             playerTurn = 1;
             gameMasterText.setText("Player 2, your turn");
@@ -136,7 +138,12 @@ public class GameFragment extends Fragment {
             gameMasterText.setText("Player 1, your turn");
         }
 
-        if(CheckWin() != -1)
+        if(chkw == 2){
+            gameMasterText.setText("It's a tie!");
+            playerTurn = -1;
+        }
+
+        if(chkw != -1)
             Win(CheckWin());
     }
 
@@ -168,12 +175,15 @@ public class GameFragment extends Fragment {
         String win2 = (String)btn10.getText() + btn11.getText() + btn12.getText();
         String win3 = (String)btn20.getText() + btn21.getText() + btn22.getText();
         String win4 = (String)btn00.getText() + btn10.getText() + btn20.getText();
-        String win5 = (String)btn01.getText() + btn11.getText() + btn22.getText();
+        String win5 = (String)btn01.getText() + btn11.getText() + btn21.getText();
         String win6 = (String)btn20.getText() + btn21.getText() + btn22.getText();
         String win7 = (String)btn00.getText() + btn11.getText() + btn22.getText();
         String win8 = (String)btn02.getText() + btn11.getText() + btn20.getText();
-
+        String equality = (String)btn00.getText() + btn01.getText() + btn02.getText() +
+                                btn10.getText() + btn11.getText() + btn12.getText() +
+                                btn20.getText() + btn21.getText() + btn22.getText();
         String[] winPossibility = new String[8];
+
         winPossibility[0] = win1;
         winPossibility[1] = win2;
         winPossibility[2] = win3;
@@ -183,13 +193,15 @@ public class GameFragment extends Fragment {
         winPossibility[6] = win7;
         winPossibility[7] = win8;
 
+        if(equality.length() == 9)
+            output = 2;
+
         for (String s : winPossibility) {
             if(s.equals("XXX"))
                 output = 0;
-            else if (s.equals("OOO"))
+            if (s.equals("OOO"))
                 output = 1;
         }
-
         return output;
     }
 }
