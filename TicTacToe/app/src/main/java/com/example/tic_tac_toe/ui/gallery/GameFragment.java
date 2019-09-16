@@ -1,5 +1,6 @@
 package com.example.tic_tac_toe.ui.gallery;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -148,10 +150,16 @@ public class GameFragment extends Fragment {
     }
 
     public void Win(int player){
-        if(player == 0)
-            gameMasterText.setText("Congratulation player 1, you win!");
-        else if(player == 1)
-            gameMasterText.setText("Congratulation player 2, you win!");
+        if(player == 0){
+            Toast.makeText(getActivity(),"Player 1, you win!",Toast.LENGTH_SHORT).show();
+            gameMasterText.setText("Player 1, you win!");
+        }
+
+        else if(player == 1){
+            Toast.makeText(getActivity(),"Player 2, you win!",Toast.LENGTH_SHORT).show();
+            gameMasterText.setText("Player 2, you win!");
+        }
+
 
         playerTurn = -1;
     }
